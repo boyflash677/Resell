@@ -5,18 +5,24 @@
   <title>Insta Shirt Offer</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
       margin: 0;
       padding: 0;
+      color: #333;
     }
     .container {
       max-width: 500px;
-      margin: auto;
+      margin: 20px auto;
       background: #fff;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
     }
     .image-scroll {
       display: flex;
@@ -29,10 +35,11 @@
       flex: 0 0 auto;
       width: 100%;
       max-width: 100%;
-      height: 500px;
+      height: 400px;
       object-fit: cover;
       scroll-snap-align: start;
-      border-radius: 10px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
     .tags {
       display: flex;
@@ -41,8 +48,8 @@
       margin-bottom: 10px;
     }
     .tag {
-      padding: 5px 10px;
-      border-radius: 5px;
+      padding: 6px 12px;
+      border-radius: 20px;
       color: #fff;
       font-size: 13px;
       font-weight: bold;
@@ -51,11 +58,13 @@
     .limited { background: #ffc107; color: #000; }
     .free { background: #2196f3; }
     h2 {
-      font-size: 20px;
-      margin: 10px 0;
+      font-size: 22px;
+      margin: 15px 0 10px;
+      text-align: center;
     }
     .price {
       font-size: 18px;
+      text-align: center;
     }
     .price .original {
       text-decoration: line-through;
@@ -63,35 +72,45 @@
       margin-right: 10px;
     }
     .price .offer {
-      color: green;
+      color: #2ecc71;
       font-weight: bold;
-      font-size: 22px;
+      font-size: 24px;
     }
     .order-btn {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background: #ff5722;
       color: white;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
+      border-radius: 30px;
+      font-size: 18px;
       font-weight: bold;
-      margin-top: 15px;
+      margin-top: 20px;
       cursor: pointer;
+      transition: background 0.3s;
+    }
+    .order-btn:hover {
+      background: #e64a19;
     }
     #successPage {
       display: none;
       text-align: center;
-      padding: 20px;
+      padding: 25px;
     }
     #successPage h3 {
       color: green;
+      font-size: 22px;
     }
     form input, form select, form button {
-      margin: 8px 0;
-      padding: 10px;
-      border-radius: 5px;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 8px;
       border: 1px solid #ccc;
+      font-size: 14px;
+    }
+    form h3 {
+      text-align: center;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -143,7 +162,26 @@
     document.getElementById("orderForm").scrollIntoView({ behavior: "smooth" });
   }const form = document.getElementById("orderForm"); const successPage = document.getElementById("successPage");
 
-form.addEventListener("submit", function(e) { e.preventDefault(); successPage.style.display = "block"; form.style.display = "none"; form.reset(); }); </script>
+form.addEventListener("submit", async function(e) { e.preventDefault(); const formData = new FormData(form); const order = {}; formData.forEach((val, key) => order[key] = val);
+
+const token = "7855969320:AAHY_y4tkKAGEvY-F2GdAHc1Ul_2qW7yT64";
+const chatId = "1972373864";
+const text = `\uD83D\uDCE6 *New Order Received*\n\n👤 *Name:* ${order.name}\n📞 *Mobile:* ${order.number}\n👕 *Size:* ${order.size}\n🏠 *Address:* ${order.house}, ${order.building}, ${order.city}, ${order.state} - ${order.pincode}`;
+try {
+  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "Markdown" })
+  });
+} catch(err) {
+  console.error("Telegram Error:", err);
+}
+
+successPage.style.display = "block";
+form.style.display = "none";
+form.reset();
+
+}); </script>
 
 </body>
 </html>
