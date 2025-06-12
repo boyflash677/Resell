@@ -5,11 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact | Sasy's Finds</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-      margin: 0;
-      padding: 0;
       color: #333;
     }
 
@@ -20,33 +24,26 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    nav {
-      margin-top: 10px;
-    }
-
     nav a {
-      margin: 0 15px;
+      margin: 0 10px;
       text-decoration: none;
       color: #ff6a00;
       font-weight: bold;
     }
 
     main {
-      padding: 30px 20px;
       max-width: 600px;
-      margin: auto;
+      margin: 30px auto;
       background-color: #fff8ee;
+      padding: 25px;
       border-radius: 16px;
       box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
 
-    h2 {
+    h1, h2 {
+      text-align: center;
       color: #d94e00;
+      margin-bottom: 20px;
     }
 
     form {
@@ -55,8 +52,8 @@
     }
 
     input, textarea {
+      margin-bottom: 15px;
       padding: 12px;
-      margin: 10px 0;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 16px;
@@ -77,12 +74,13 @@
     }
 
     .tg-button {
-      display: inline-block;
+      display: block;
       margin-top: 20px;
       background: #0088cc;
       color: #fff;
-      padding: 12px 20px;
+      padding: 12px;
       border-radius: 10px;
+      text-align: center;
       text-decoration: none;
       font-weight: bold;
     }
@@ -91,7 +89,7 @@
       text-align: center;
       padding: 20px;
       font-size: 14px;
-      color: #777;
+      color: #555;
       margin-top: 40px;
     }
   </style>
@@ -110,9 +108,9 @@
 
   <main>
     <h2>We'd love to hear from you!</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
+    <form onsubmit="event.preventDefault(); alert('Thanks! This form is for demo only.')">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
       <textarea rows="5" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
