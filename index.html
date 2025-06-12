@@ -3,194 +3,215 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Insta Shirt Offer</title>
+  <title>Sasy's Finds - Offer</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    * {
       margin: 0;
       padding: 0;
-      color: #333;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #2b5876, #4e4376);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 10px;
     }
     .container {
+      width: 100%;
       max-width: 500px;
-      margin: 20px auto;
-      background: #fff;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 1s ease;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 1s ease-in-out;
     }
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .logo {
       text-align: center;
       margin-bottom: 20px;
     }
     .logo img {
-      max-width: 160px;
-      border-radius: 12px;
+      width: 150px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .image-scroll {
       display: flex;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
       gap: 10px;
-      margin-bottom: 15px;
+      scroll-snap-type: x mandatory;
+      margin-bottom: 20px;
     }
     .image-scroll img {
-      flex: 0 0 auto;
-      width: 100%;
-      max-width: 100%;
-      height: 400px;
-      object-fit: cover;
+      height: 360px;
+      border-radius: 16px;
       scroll-snap-align: start;
-      border-radius: 12px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      object-fit: cover;
+      flex-shrink: 0;
+      width: 100%;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
     .tags {
       display: flex;
+      justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
     .tag {
-      padding: 6px 12px;
-      border-radius: 20px;
+      background: #000000aa;
       color: #fff;
-      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
       font-weight: bold;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
     }
-    .cod { background: #28a745; }
-    .limited { background: #ffc107; color: #000; }
-    .free { background: #2196f3; }
     h2 {
-      font-size: 22px;
-      margin: 15px 0 10px;
       text-align: center;
+      color: #fff;
+      font-size: 22px;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 2px #000;
     }
     .price {
-      font-size: 18px;
       text-align: center;
+      color: #fff;
+      font-size: 20px;
+      margin-bottom: 20px;
     }
     .price .original {
       text-decoration: line-through;
-      color: red;
+      color: #ff4e4e;
       margin-right: 10px;
     }
     .price .offer {
-      color: #2ecc71;
+      color: #00ffad;
       font-weight: bold;
-      font-size: 24px;
+      font-size: 26px;
     }
     .order-btn {
       width: 100%;
-      padding: 14px;
-      background: #ff5722;
-      color: white;
-      border: none;
-      border-radius: 30px;
+      padding: 15px;
+      background: linear-gradient(to right, #ff512f, #dd2476);
+      color: #fff;
       font-size: 18px;
       font-weight: bold;
-      margin-top: 20px;
+      border: none;
+      border-radius: 30px;
       cursor: pointer;
-      transition: background 0.3s;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease;
     }
     .order-btn:hover {
-      background: #e64a19;
+      transform: scale(1.03);
     }
-    #successPage {
+    form {
       display: none;
-      text-align: center;
-      padding: 25px;
+      flex-direction: column;
+      margin-top: 20px;
     }
-    #successPage h3 {
-      color: green;
-      font-size: 22px;
+    form h3 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 10px;
     }
     form input, form select, form button {
       margin: 10px 0;
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #ccc;
       font-size: 14px;
     }
-    form h3 {
+    #successPage {
+      display: none;
       text-align: center;
-      margin-bottom: 10px;
+      color: #fff;
+      padding: 25px;
+    }
+    #successPage h3 {
+      color: #00ffae;
+      font-size: 22px;
     }
     .footer-buttons {
       display: flex;
-      justify-content: space-between;
-      margin-top: 30px;
       gap: 10px;
+      margin-top: 30px;
     }
     .footer-buttons a {
       flex: 1;
-      text-align: center;
-      text-decoration: none;
-      background-color: #673ab7;
-      color: white;
+      background: linear-gradient(to right, #36d1dc, #5b86e5);
+      color: #fff;
       padding: 12px;
       border-radius: 30px;
+      text-align: center;
+      text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
     }
     .footer-buttons a:hover {
-      background-color: #512da8;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="logo">
-      <img src="https://i.ibb.co/YZKtw0p/sasys-finds-logo.png" alt="Sasy's Finds Logo">
+      <img src="https://files.catbox.moe/sb2hj4.jpg" alt="Sasy's Finds Logo">
     </div>
+
     <div class="image-scroll">
       <img src="https://files.catbox.moe/x95b0u.jpg" alt="Shirt 1">
       <img src="https://files.catbox.moe/ovl0an.jpg" alt="Shirt 2">
     </div>
+
     <div class="tags">
-      <span class="tag cod">COD Available</span>
-      <span class="tag limited">Limited Time Offer</span>
-      <span class="tag free">Free Shipping</span>
+      <span class="tag">COD Available</span>
+      <span class="tag">Limited Time</span>
+      <span class="tag">Free Shipping</span>
     </div>
+
     <h2>Eyebogler Men's Relax Fit Shirt</h2>
     <div class="price">
       <span class="original">₹999</span>
       <span class="offer">₹499 Only</span>
     </div>
-    <button class="order-btn" onclick="showForm()">Order Now</button>
-    <form id="orderForm" style="display:none; flex-direction: column; margin-top: 20px;">
+
+    <button class="order-btn" onclick="showForm()">🛒 Order Now</button>
+
+    <form id="orderForm">
       <h3>Place Your Order</h3>
-      <label>Select Size:</label>
       <select name="size" required>
-        <option value="">Choose size</option>
-        <option>S</option>
-        <option>M</option>
-        <option>L</option>
-        <option>XL</option>
-        <option>XXL</option>
+        <option value="">Choose Size</option>
+        <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
       </select>
-      <input type="text" name="name" placeholder="Full Name" required />
-      <input type="tel" name="number" placeholder="Mobile Number" pattern="[0-9]{10}" required />
-      <input type="text" name="pincode" placeholder="Pincode" required />
-      <input type="text" name="city" placeholder="City" required />
-      <input type="text" name="state" placeholder="State" required />
-      <input type="text" name="house" placeholder="House No / Flat No" required />
-      <input type="text" name="building" placeholder="Building / Landmark" required />
-      <button type="submit">Place Order</button>
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="tel" name="number" placeholder="Mobile Number" pattern="[0-9]{10}" required>
+      <input type="text" name="pincode" placeholder="Pincode" required>
+      <input type="text" name="city" placeholder="City" required>
+      <input type="text" name="state" placeholder="State" required>
+      <input type="text" name="house" placeholder="House / Flat No." required>
+      <input type="text" name="building" placeholder="Building / Landmark" required>
+      <button type="submit">✅ Place Order</button>
     </form>
+
     <div id="successPage">
       <h3>✅ Order Placed Successfully!</h3>
-      <p>Thank you for your order. Our team will contact you shortly.</p>
+      <p>Our team will contact you soon.</p>
     </div>
 
     <div class="footer-buttons">
-      <a href="https://t.me/stakewith_lemon" target="_blank">Chat Room</a>
-      <a href="https://t.me/Innocent_txt" target="_blank">Contact Admin</a>
+      <a href="https://t.me/stakewith_lemon" target="_blank">📢 Chat Room</a>
+      <a href="https://t.me/Innocent_txt" target="_blank">💬 Contact Admin</a>
     </div>
   </div>
 
@@ -219,7 +240,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "Markdown" })
         });
-      } catch(err) {
+      } catch (err) {
         console.error("Telegram Error:", err);
       }
 
