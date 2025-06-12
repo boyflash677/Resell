@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -23,6 +24,14 @@
     @keyframes fadeIn {
       from {opacity: 0; transform: translateY(30px);}
       to {opacity: 1; transform: translateY(0);}
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      max-width: 160px;
+      border-radius: 12px;
     }
     .image-scroll {
       display: flex;
@@ -112,76 +121,112 @@
       text-align: center;
       margin-bottom: 10px;
     }
+    .footer-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      gap: 10px;
+    }
+    .footer-buttons a {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      background-color: #673ab7;
+      color: white;
+      padding: 12px;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .footer-buttons a:hover {
+      background-color: #512da8;
+    }
   </style>
 </head>
 <body>
-<div class="container">
-  <div class="image-scroll">
-    <img src="https://files.catbox.moe/x95b0u.jpg" alt="Shirt 1">
-    <img src="https://files.catbox.moe/ovl0an.jpg" alt="Shirt 2">
+  <div class="container">
+    <div class="logo">
+      <img src="https://i.ibb.co/YZKtw0p/sasys-finds-logo.png" alt="Sasy's Finds Logo">
+    </div>
+    <div class="image-scroll">
+      <img src="https://files.catbox.moe/x95b0u.jpg" alt="Shirt 1">
+      <img src="https://files.catbox.moe/ovl0an.jpg" alt="Shirt 2">
+    </div>
+    <div class="tags">
+      <span class="tag cod">COD Available</span>
+      <span class="tag limited">Limited Time Offer</span>
+      <span class="tag free">Free Shipping</span>
+    </div>
+    <h2>Eyebogler Men's Relax Fit Shirt</h2>
+    <div class="price">
+      <span class="original">₹999</span>
+      <span class="offer">₹499 Only</span>
+    </div>
+    <button class="order-btn" onclick="showForm()">Order Now</button>
+    <form id="orderForm" style="display:none; flex-direction: column; margin-top: 20px;">
+      <h3>Place Your Order</h3>
+      <label>Select Size:</label>
+      <select name="size" required>
+        <option value="">Choose size</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+        <option>XXL</option>
+      </select>
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="tel" name="number" placeholder="Mobile Number" pattern="[0-9]{10}" required />
+      <input type="text" name="pincode" placeholder="Pincode" required />
+      <input type="text" name="city" placeholder="City" required />
+      <input type="text" name="state" placeholder="State" required />
+      <input type="text" name="house" placeholder="House No / Flat No" required />
+      <input type="text" name="building" placeholder="Building / Landmark" required />
+      <button type="submit">Place Order</button>
+    </form>
+    <div id="successPage">
+      <h3>✅ Order Placed Successfully!</h3>
+      <p>Thank you for your order. Our team will contact you shortly.</p>
+    </div>
+
+    <div class="footer-buttons">
+      <a href="https://t.me/stakewith_lemon" target="_blank">Chat Room</a>
+      <a href="https://t.me/Innocent_txt" target="_blank">Contact Admin</a>
+    </div>
   </div>
-  <div class="tags">
-    <span class="tag cod">COD Available</span>
-    <span class="tag limited">Limited Time Offer</span>
-    <span class="tag free">Free Shipping</span>
-  </div>
-  <h2>Eyebogler Men's Relax Fit Shirt</h2>
-  <div class="price">
-    <span class="original">₹999</span>
-    <span class="offer">₹499 Only</span>
-  </div>
-  <button class="order-btn" onclick="showForm()">Order Now</button>
-  <form id="orderForm" style="display:none; flex-direction: column; margin-top: 20px;">
-    <h3>Place Your Order</h3>
-    <label>Select Size:</label>
-    <select name="size" required>
-      <option value="">Choose size</option>
-      <option>S</option>
-      <option>M</option>
-      <option>L</option>
-      <option>XL</option>
-      <option>XXL</option>
-    </select>
-    <input type="text" name="name" placeholder="Full Name" required />
-    <input type="tel" name="number" placeholder="Mobile Number" pattern="[0-9]{10}" required />
-    <input type="text" name="pincode" placeholder="Pincode" required />
-    <input type="text" name="city" placeholder="City" required />
-    <input type="text" name="state" placeholder="State" required />
-    <input type="text" name="house" placeholder="House No / Flat No" required />
-    <input type="text" name="building" placeholder="Building / Landmark" required />
-    <button type="submit">Place Order</button>
-  </form>
-  <div id="successPage">
-    <h3>✅ Order Placed Successfully!</h3>
-    <p>Thank you for your order. Our team will contact you shortly.</p>
-  </div>
-</div>
-<script>
-  function showForm() {
-    document.getElementById("orderForm").style.display = "flex";
-    document.getElementById("orderForm").scrollIntoView({ behavior: "smooth" });
-  }const form = document.getElementById("orderForm"); const successPage = document.getElementById("successPage");
 
-form.addEventListener("submit", async function(e) { e.preventDefault(); const formData = new FormData(form); const order = {}; formData.forEach((val, key) => order[key] = val);
+  <script>
+    function showForm() {
+      document.getElementById("orderForm").style.display = "flex";
+      document.getElementById("orderForm").scrollIntoView({ behavior: "smooth" });
+    }
 
-const token = "7855969320:AAHY_y4tkKAGEvY-F2GdAHc1Ul_2qW7yT64";
-const chatId = "1972373864";
-const text = `\uD83D\uDCE6 *New Order Received*\n\n👤 *Name:* ${order.name}\n📞 *Mobile:* ${order.number}\n👕 *Size:* ${order.size}\n🏠 *Address:* ${order.house}, ${order.building}, ${order.city}, ${order.state} - ${order.pincode}`;
-try {
-  await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "Markdown" })
-  });
-} catch(err) {
-  console.error("Telegram Error:", err);
-}
+    const form = document.getElementById("orderForm");
+    const successPage = document.getElementById("successPage");
 
-successPage.style.display = "block";
-form.style.display = "none";
-form.reset();
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const order = {};
+      formData.forEach((val, key) => order[key] = val);
 
-}); </script>
+      const token = "7855969320:AAHY_y4tkKAGEvY-F2GdAHc1Ul_2qW7yT64";
+      const chatId = "1972373864";
+      const text = `📦 *New Order Received*\n\n👤 *Name:* ${order.name}\n📞 *Mobile:* ${order.number}\n👕 *Size:* ${order.size}\n🏠 *Address:* ${order.house}, ${order.building}, ${order.city}, ${order.state} - ${order.pincode}`;
 
+      try {
+        await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: chatId, text: text, parse_mode: "Markdown" })
+        });
+      } catch(err) {
+        console.error("Telegram Error:", err);
+      }
+
+      successPage.style.display = "block";
+      form.style.display = "none";
+      form.reset();
+    });
+  </script>
 </body>
 </html>
