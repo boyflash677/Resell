@@ -1,145 +1,107 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoliPop Store</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fce4ec;
+  padding: 20px;
 }
-body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #f1f3f6;
-  padding: 30px 10px;
+
+h1 {
+  text-align: center;
+  color: #e91e63;
+  margin-bottom: 30px;
 }
-.container {
-  max-width: 500px;
-  margin: auto;
+
+.product {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
   overflow: hidden;
-  animation: fadeIn 0.6s ease-in-out;
+  padding: 20px;
 }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+
+.product h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
 }
-.logo img {
-  width: 140px;
-  display: block;
-  margin: 20px auto 10px;
-}
-.image-scroll {
+
+.images {
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
   gap: 10px;
-  padding: 10px 20px;
-}
-.image-scroll img {
-  scroll-snap-align: start;
-  border-radius: 8px;
-  width: 100%;
-  object-fit: cover;
-  height: 320px;
-  flex-shrink: 0;
-}
-.tags {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 10px 20px;
-}
-.tag {
-  background-color: #2874F0;
-  color: white;
-  font-size: 12px;
-  padding: 6px 12px;
-  border-radius: 20px;
-}
-h2 {
-  text-align: center;
-  font-size: 20px;
-  padding: 10px 20px 0;
-  color: #212121;
-}
-.price {
-  text-align: center;
-  font-size: 18px;
-  padding: 8px 0 16px;
-}
-.price .original {
-  text-decoration: line-through;
-  color: #757575;
-  margin-right: 8px;
-}
-.price .offer {
-  color: #388e3c;
-  font-size: 22px;
-  font-weight: bold;
-}
-.order-btn {
-  background-color: #fb641b;
-  color: white;
-  width: 90%;
-  display: block;
-  margin: 10px auto;
-  padding: 14px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-.order-btn:hover {
-  background-color: #d85913;
-}
-form {
-  display: none;
-  flex-direction: column;
-  padding: 20px;
-}
-form h3 {
-  text-align: center;
-  color: #2874F0;
   margin-bottom: 10px;
 }
-form input, form select, form button {
-  margin: 10px 0;
-  padding: 12px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+
+.images img {
+  height: 180px;
+  border-radius: 8px;
 }
-form button {
-  background-color: #2874F0;
-  color: white;
+
+.price {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.price del {
+  color: #888;
+  margin-right: 10px;
+}
+
+.discount {
+  color: green;
   font-weight: bold;
 }
-#successPage {
-  display: none;
-  text-align: center;
-  padding: 25px;
-}
-#successPage h3 {
-  color: #388e3c;
-  font-size: 20px;
-}
-.footer-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 20px;
-}
-.footer-buttons a {
-  flex: 1;
-  background-color: #2874F0;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-}
-.footer-buttons a:hover {
-  background-color: #1565c0;
-}
+
+  </style>
+</head><body>
+  <h1>LoliPop Store</h1>  <div class="product">
+    <h2>Tigerstyle Pallazos for Girl & Women</h2>
+    <div class="images">
+      <img src="https://files.catbox.moe/34nvo8.jpg" />
+      <img src="https://files.catbox.moe/dd7bqd.jpg" />
+      <img src="https://files.catbox.moe/c2yzx5.jpg" />
+      <img src="https://files.catbox.moe/hbtp83.jpg" />
+      <img src="https://files.catbox.moe/iq27iu.jpg" />
+    </div>
+    <div class="price">
+      <del>₹999</del><span>Only ₹499</span>
+    </div>
+    <div class="discount">(50% OFF)</div>
+  </div>  <div class="product">
+    <h2>Short-Sleeved Straight Shoulder Knitted T-Shirt for Women (Black - 3XL)</h2>
+    <div class="images">
+      <img src="https://files.catbox.moe/fospgy.jpg" />
+      <img src="https://files.catbox.moe/aik0pn.jpg" />
+      <img src="https://files.catbox.moe/13mc47.jpg" />
+      <img src="https://files.catbox.moe/1fsri7.jpg" />
+      <img src="https://files.catbox.moe/7j6cyi.jpg" />
+    </div>
+    <div class="price">
+      <del>₹2999</del><span>Only ₹699</span>
+    </div>
+    <div class="discount">(76.7% OFF)</div>
+  </div>  <div class="product">
+    <h2>Transparent Flower Hair Claw Water Hair Clip for Women & Girls (Pack of 4)</h2>
+    <div class="images">
+      <img src="https://files.catbox.moe/bgxjhu.jpg" />
+      <img src="https://files.catbox.moe/ucxgz5.jpg" />
+      <img src="https://files.catbox.moe/28z2wp.jpg" />
+      <img src="https://files.catbox.moe/5qac97.jpg" />
+      <img src="https://files.catbox.moe/z3afst.jpg" />
+      <img src="https://files.catbox.moe/w7up05.jpg" />
+    </div>
+    <div class="price">
+      <span>Only ₹299</span>
+    </div>
+  </div>
+</body></html
