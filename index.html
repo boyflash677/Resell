@@ -1,107 +1,616 @@
-<!DOCTYPE html><html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LoliPop Store</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #fce4ec;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  color: #e91e63;
-  margin-bottom: 30px;
-}
-
-.product {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  margin-bottom: 40px;
-  overflow: hidden;
-  padding: 20px;
-}
-
-.product h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.images {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.images img {
-  height: 180px;
-  border-radius: 8px;
-}
-
-.price {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.price del {
-  color: #888;
-  margin-right: 10px;
-}
-
-.discount {
-  color: green;
-  font-weight: bold;
-}
-
-  </style>
-</head><body>
-  <h1>LoliPop Store</h1>  <div class="product">
-    <h2>Tigerstyle Pallazos for Girl & Women</h2>
-    <div class="images">
-      <img src="https://files.catbox.moe/34nvo8.jpg" />
-      <img src="https://files.catbox.moe/dd7bqd.jpg" />
-      <img src="https://files.catbox.moe/c2yzx5.jpg" />
-      <img src="https://files.catbox.moe/hbtp83.jpg" />
-      <img src="https://files.catbox.moe/iq27iu.jpg" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoliPop Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: #fce4ec;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 30px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #e91e63;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .product {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .product:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .images {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+        
+        .images::-webkit-scrollbar {
+            height: 5px;
+        }
+        
+        .images::-webkit-scrollbar-thumb {
+            background: #e91e63;
+            border-radius: 10px;
+        }
+        
+        .images img {
+            height: 180px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .images img:hover {
+            transform: scale(1.05);
+        }
+        
+        .price {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .price del {
+            color: #888;
+            margin-right: 10px;
+        }
+        
+        .discount {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-buy {
+            background: #e91e63;
+            color: white;
+        }
+        
+        .btn-buy:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-cart {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-cart:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-cart {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: #e91e63;
+            font-weight: bold;
+        }
+        
+        .remove-item {
+            color: #888;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+        
+        .cart-total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: right;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            background: #c2185b;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        .checkout-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .submit-order {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .images img {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>LoliPop Store</h1>
+        <div class="cart-icon" onclick="toggleCart()">
+            🛒
+            <span class="cart-count">0</span>
+        </div>
     </div>
-    <div class="price">
-      <del>₹999</del><span>Only ₹499</span>
+    
+    <div class="product">
+        <h2>Tigerstyle Pallazos for Girl & Women</h2>
+        <div class="images">
+            <img src="https://files.catbox.moe/34nvo8.jpg" />
+            <img src="https://files.catbox.moe/dd7bqd.jpg" />
+            <img src="https://files.catbox.moe/c2yzx5.jpg" />
+            <img src="https://files.catbox.moe/hbtp83.jpg" />
+            <img src="https://files.catbox.moe/iq27iu.jpg" />
+        </div>
+        <div class="price">
+            <del>₹999</del><span>Only ₹499</span>
+        </div>
+        <div class="discount">(50% OFF)</div>
+        <div class="buttons">
+            <button class="btn btn-buy" onclick="buyNow('Tigerstyle Pallazos', 499)">Buy Now</button>
+            <button class="btn btn-cart" onclick="addToCart('Tigerstyle Pallazos', 499, 'https://files.catbox.moe/34nvo8.jpg')">Add to Cart</button>
+        </div>
     </div>
-    <div class="discount">(50% OFF)</div>
-  </div>  <div class="product">
-    <h2>Short-Sleeved Straight Shoulder Knitted T-Shirt for Women (Black - 3XL)</h2>
-    <div class="images">
-      <img src="https://files.catbox.moe/fospgy.jpg" />
-      <img src="https://files.catbox.moe/aik0pn.jpg" />
-      <img src="https://files.catbox.moe/13mc47.jpg" />
-      <img src="https://files.catbox.moe/1fsri7.jpg" />
-      <img src="https://files.catbox.moe/7j6cyi.jpg" />
+    
+    <div class="product">
+        <h2>Short-Sleeved Straight Shoulder Knitted T-Shirt for Women (Black - 3XL)</h2>
+        <div class="images">
+            <img src="https://files.catbox.moe/fospgy.jpg" />
+            <img src="https://files.catbox.moe/aik0pn.jpg" />
+            <img src="https://files.catbox.moe/13mc47.jpg" />
+            <img src="https://files.catbox.moe/1fsri7.jpg" />
+            <img src="https://files.catbox.moe/7j6cyi.jpg" />
+        </div>
+        <div class="price">
+            <del>₹2999</del><span>Only ₹699</span>
+        </div>
+        <div class="discount">(76.7% OFF)</div>
+        <div class="buttons">
+            <button class="btn btn-buy" onclick="buyNow('Knitted T-Shirt', 699)">Buy Now</button>
+            <button class="btn btn-cart" onclick="addToCart('Knitted T-Shirt', 699, 'https://files.catbox.moe/fospgy.jpg')">Add to Cart</button>
+        </div>
     </div>
-    <div class="price">
-      <del>₹2999</del><span>Only ₹699</span>
+    
+    <div class="product">
+        <h2>Transparent Flower Hair Claw Water Hair Clip for Women & Girls (Pack of 4)</h2>
+        <div class="images">
+            <img src="https://files.catbox.moe/bgxjhu.jpg" />
+            <img src="https://files.catbox.moe/ucxgz5.jpg" />
+            <img src="https://files.catbox.moe/28z2wp.jpg" />
+            <img src="https://files.catbox.moe/5qac97.jpg" />
+            <img src="https://files.catbox.moe/z3afst.jpg" />
+            <img src="https://files.catbox.moe/w7up05.jpg" />
+        </div>
+        <div class="price">
+            <span>Only ₹299</span>
+        </div>
+        <div class="buttons">
+            <button class="btn btn-buy" onclick="buyNow('Flower Hair Claw', 299)">Buy Now</button>
+            <button class="btn btn-cart" onclick="addToCart('Flower Hair Claw', 299, 'https://files.catbox.moe/bgxjhu.jpg')">Add to Cart</button>
+        </div>
     </div>
-    <div class="discount">(76.7% OFF)</div>
-  </div>  <div class="product">
-    <h2>Transparent Flower Hair Claw Water Hair Clip for Women & Girls (Pack of 4)</h2>
-    <div class="images">
-      <img src="https://files.catbox.moe/bgxjhu.jpg" />
-      <img src="https://files.catbox.moe/ucxgz5.jpg" />
-      <img src="https://files.catbox.moe/28z2wp.jpg" />
-      <img src="https://files.catbox.moe/5qac97.jpg" />
-      <img src="https://files.catbox.moe/z3afst.jpg" />
-      <img src="https://files.catbox.moe/w7up05.jpg" />
+    
+    <!-- New Products -->
+    <div class="product">
+        <h2>Women's Cotton Printed Kurti with Palazzos (Pack of 2)</h2>
+        <div class="images">
+            <img src="https://example.com/kurti1.jpg" />
+            <img src="https://example.com/kurti2.jpg" />
+            <img src="https://example.com/kurti3.jpg" />
+        </div>
+        <div class="price">
+            <del>₹1599</del><span>Only ₹799</span>
+        </div>
+        <div class="discount">(50% OFF)</div>
+        <div class="buttons">
+            <button class="btn btn-buy" onclick="buyNow('Cotton Kurti Set', 799)">Buy Now</button>
+            <button class="btn btn-cart" onclick="addToCart('Cotton Kurti Set', 799, 'https://example.com/kurti1.jpg')">Add to Cart</button>
+        </div>
     </div>
-    <div class="price">
-      <span>Only ₹299</span>
+    
+    <div class="product">
+        <h2>Women's Stylish Handbag (Multicolor)</h2>
+        <div class="images">
+            <img src="https://example.com/bag1.jpg" />
+            <img src="https://example.com/bag2.jpg" />
+            <img src="https://example.com/bag3.jpg" />
+        </div>
+        <div class="price">
+            <del>₹1299</del><span>Only ₹599</span>
+        </div>
+        <div class="discount">(53.9% OFF)</div>
+        <div class="buttons">
+            <button class="btn btn-buy" onclick="buyNow('Stylish Handbag', 599)">Buy Now</button>
+            <button class="btn btn-cart" onclick="addToCart('Stylish Handbag', 599, 'https://example.com/bag1.jpg')">Add to Cart</button>
+        </div>
     </div>
-  </div>
-</body></html
+    
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <span class="close-cart" onclick="toggleCart()">×</span>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            Total: ₹<span class="total-amount">0</span>
+        </div>
+        <button class="checkout-btn" onclick="showCheckoutForm()">Proceed to Checkout</button>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" onclick="toggleCart()"></div>
+    
+    <!-- Checkout Form (hidden by default) -->
+    <div id="checkoutForm" style="display:none;">
+        <div class="checkout-form">
+            <h2>Checkout</h2>
+            <form id="orderForm" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Shipping Address</label>
+                    <textarea id="address" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="payment">Payment Method</label>
+                    <select id="payment" required>
+                        <option value="">Select payment method</option>
+                        <option value="cod">Cash on Delivery</option>
+                        <option value="upi">UPI Payment</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-order">Place Order</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        let cart = [];
+        
+        // Toggle cart visibility
+        function toggleCart() {
+            document.querySelector('.cart-sidebar').classList.toggle('active');
+            document.querySelector('.overlay').classList.toggle('active');
+        }
+        
+        // Add item to cart
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name,
+                    price,
+                    image,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            showNotification(`${name} added to cart!`);
+        }
+        
+        // Buy now function (adds to cart and opens checkout)
+        function buyNow(name, price) {
+            addToCart(name, price, '');
+            toggleCart();
+        }
+        
+        // Update cart UI
+        function updateCart() {
+            const cartItemsEl = document.querySelector('.cart-items');
+            const cartCountEl = document.querySelector('.cart-count');
+            const totalAmountEl = document.querySelector('.total-amount');
+            
+            // Clear current items
+            cartItemsEl.innerHTML = '';
+            
+            // Add each item to cart
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">₹${item.price} × ${item.quantity} = ₹${item.price * item.quantity}</div>
+                    </div>
+                    <div class="remove-item" onclick="removeFromCart('${item.name}')">×</div>
+                `;
+                
+                cartItemsEl.appendChild(itemEl);
+            });
+            
+            // Update total and count
+            totalAmountEl.textContent = total;
+            cartCountEl.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+        
+        // Remove item from cart
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCart();
+        }
+        
+        // Show checkout form
+        function showCheckoutForm() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            document.getElementById('checkoutForm').style.display = 'block';
+            document.querySelector('.cart-sidebar').classList.remove('active');
+        }
+        
+        // Submit order (with Telegram bot integration)
+        function submitOrder(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const payment = document.getElementById('payment').value;
+            
+            // Calculate total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Format order details
+            let orderDetails = `New Order from ${name}\n\n`;
+            orderDetails += `📱 Phone: ${phone}\n`;
+            orderDetails += `🏠 Address: ${address}\n`;
+            orderDetails += `💳 Payment: ${payment === 'cod' ? 'Cash on Delivery' : 'UPI Payment'}\n\n`;
+            orderDetails += `📦 Order Items:\n`;
+            
+            cart.forEach(item => {
+                orderDetails += `- ${item.name} (Qty: ${item.quantity}) - ₹${item.price * item.quantity}\n`;
+            });
+            
+            orderDetails += `\n💰 Total: ₹${total}`;
+            
+            // Send to Telegram bot (replace with your bot token and chat ID)
+            const botToken = 'YOUR_TELEGRAM_BOT_TOKEN';
+            const chatId = 'YOUR_CHAT_ID';
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: orderDetails
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Order placed successfully! We will contact you soon.');
+                // Clear cart
+                cart = [];
+                updateCart();
+                document.getElementById('checkoutForm').style.display = 'none';
+                document.getElementById('orderForm').reset();
+                document.querySelector('.overlay').classList.remove('active');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error placing your order. Please try again.');
+            });
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = '#4CAF50';
+            notification.style.color = 'white';
+            notification.style.padding = '15px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '1000';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+    </script>
+</body>
+  </html>
